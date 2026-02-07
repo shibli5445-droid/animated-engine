@@ -11,10 +11,10 @@ export default function ClientDashboardPage() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight text-white mb-1">
-                        Welcome back, {MOCK_CLIENT.name.split(' ')[0]}
+                        {MOCK_CLIENT.greeting}
                     </h1>
                     <p className="text-muted-foreground">
-                        Let's crush your goals today.
+                        {MOCK_CLIENT.motivationalMessage}
                     </p>
                 </div>
                 <div className="flex items-center gap-4">

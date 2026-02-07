@@ -6,6 +6,8 @@ import { LayoutDashboard, Users, Clock, Settings, LogOut, Hexagon, Menu } from "
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function DashboardLayout({
     children,
@@ -13,13 +15,26 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const router = useRouter();
 
-    const navItems = [
-        { name: "Client Dashboard", href: "/dashboard", icon: LayoutDashboard },
-        { name: "Admin Overview", href: "/admin", icon: Users },
-        { name: "Time Tracker", href: "/admin/tracker", icon: Clock },
-        { name: "Settings", href: "/settings", icon: Settings },
-    ];
+    const handleLogout = () => {
+        // In a real app, you would sign out from Supabase here
+        toast.info("Signed out safely");
+        router.push("/");
+    };
+
+    const isAdmin = pathname.startsWith("/admin");
+
+    const navItems = isAdmin
+        ? [
+            { name: "Admin Overview", href: "/admin", icon: Users },
+            { name: "Time Tracker", href: "/admin/tracker", icon: Clock },
+            { name: "Settings", href: "/admin/settings", icon: Settings }, // Future admin settings
+        ]
+        : [
+            { name: "Client Dashboard", href: "/dashboard", icon: LayoutDashboard },
+            { name: "Settings", href: "/dashboard/settings", icon: Settings },
+        ];
 
     return (
         <div className="flex min-h-screen bg-background text-foreground">
@@ -52,7 +67,10 @@ export default function DashboardLayout({
                         })}
                     </nav>
                     <div className="border-t border-border p-4">
-                        <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors">
+                        <button
+                            onClick={handleLogout}
+                            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+                        >
                             <LogOut className="h-4 w-4" />
                             Sign Out
                         </button>
@@ -100,7 +118,10 @@ export default function DashboardLayout({
                                 })}
                             </nav>
                             <div className="border-t border-border p-4">
-                                <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors">
+                                <button
+                                    onClick={handleLogout}
+                                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+                                >
                                     <LogOut className="h-4 w-4" />
                                     Sign Out
                                 </button>

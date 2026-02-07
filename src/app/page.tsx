@@ -10,11 +10,8 @@ export default function Home() {
         High-Performance Coaching Dashboard
       </p>
       <div className="flex gap-4">
-        <Link href="/dashboard" className="px-4 py-2 bg-primary text-primary-foreground rounded hover:opacity-90 transition">
-          Client Dashboard
-        </Link>
-        <Link href="/admin" className="px-4 py-2 bg-secondary text-secondary-foreground rounded hover:opacity-90 transition">
-          Admin Dashboard
+        <Link href="/login" className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition shadow-lg shadow-primary/20">
+          Login to Dashboard
         </Link>
       </div>
     </main>
