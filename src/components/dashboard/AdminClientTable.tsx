@@ -62,7 +62,7 @@ export function AdminClientTable({ clients, onUpdateClient }: { clients: Client[
         setIsMessageOpen(false);
     };
 
-    const handleProfileSave = (updatedClient: Client) => {
+    const handleProfileSave = (updatedClient: any) => {
         onUpdateClient(updatedClient);
         setIsEditProfileOpen(false);
     };
